@@ -1,0 +1,51 @@
+#!/usr/bin/env ruby
+
+class DoubleArgFilter
+  def initialize(filter, extra_eat = 1)
+    @filter = filter.freeze
+    @extra_eat = extra_eat.to_i
+    @eat = 0
+  end
+  def =~(thing)
+    eat? || filter?(thing)
+  end
+private
+  def eat?
+    if @eat > 0
+      # puts "eating"
+      @eat -= 1
+      true
+    else
+      false
+    end
+  end
+  def filter?(thing)
+    if @filter =~ thing
+      # puts "matched #{@filter} against #{thing}"
+      @eat = @extra_eat.dup
+      true
+    else
+      false
+    end
+  end
+
+end
+
+$filter = [
+  /-f(?:diagnostics-show-note-include-stack|macro-backtrace-limit)/,
+  *['index-store-path', '-serialize-diagnostics'].map { |s| DoubleArgFilter.new(Regexp.new('-' + s)) }
+]
+
+invocation = $0
+
+cmd_name = File.basename(invocation).sub('filtered-', '')
+cmd = File.join(File.dirname(invocation), cmd_name)
+filtered_args = ARGV.reject { |arg| rj = $filter.any? { |f| f =~ arg};
+  # puts "#{arg} rj'd" if rj; 
+  rj }
+
+# puts 'cmd_name = ' + cmd_name.to_s
+# puts 'cmd = ' + cmd.to_s
+# puts 'filtered_args = ' + filtered_args.to_s
+# $stdout.flush
+system([cmd, cmd_name], *filtered_args)
