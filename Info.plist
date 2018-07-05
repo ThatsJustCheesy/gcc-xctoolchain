@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Aliases</key>
+	<array>
+		<string>gcc</string>
+	</array>
+	<key>CFBundleIdentifier</key>
+	<string>com.justcheesy.gcc-xctoolchain</string>
+	<key>CompatibilityVersion</key>
+	<integer>2</integer>
+	<key>CompatibilityVersionDisplayString</key>
+	<string>Xcode 9.2</string>
+	<key>CreatedDate</key>
+	<date>2018-07-04T16:00:00Z</date>
+	<key>DisplayName</key>
+	<string>GCC</string>
+	<key>OverrideBuildSettings</key>
+	<dict>
+		<key>CC</key>
+		<string>gcc</string>
+		<key>CXX</key>
+		<string>g++</string>
+	</dict>
+	<key>ReportProblemURL</key>
+	<string></string>
+	<key>ShortDisplayName</key>
+	<string>GCC</string>
+	<key>Version</key>
+	<string>1.0</string>
+</dict>
+</plist>
