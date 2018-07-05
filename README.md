@@ -5,6 +5,7 @@ A barebones Xcode xctoolchain that replaces Clang with GCC.
 This warning is right up front and in-your-face. Yes, that's how much you need to pay attention here.
 
 This was hacked together in under a day for a brief test environment, and I consider it in its current form a proof-of-concept. I used Homebrew to install GCC 8.1 under a root of `/usr/local/Cellar`, so that's where I had the symlinks point. Yes, everything other than the filter script and its links is a symlink into there. So it will be broken on your machine. Sorry about that. I recommend you install GCC 8.1 through `brew` and fix the symlinks to point there on your machine. Also, link all of the `filtered-` commands to `argument-filter`. That’s a required shim script.
+(**Later edit:** Oops, I didn't even include any of that. Basically, fix each symlink under `usr/` to point to your GCC installation, and in that GCC install add links for `ar`, `c++`, `cc`, `cpp`, `g++`, `gcc`, `gcov`, `nm`, and `ranlib` and point them all to the ones with the version number tacked on the end. Then stick the `argument-filter` script in there with them, and make two links to that: one called `filtered-gcc` and one called `filtered-g++`.)
 
 Seriously, don't use this for anything you care about. If you really want to, by all means feel free to fork and improve (auto-symlinking and improved argument filters are the immediate stick-outs). I will pull back your changes if I see them useful.
 
